@@ -3,11 +3,10 @@ import AdSection from '../components/UI/organisms/AdSection';
 import GridLayout from '../components/templates/GridLayout';
 import ProductListSection from '../components/UI/organisms/ProductListSection';
 
-import productItems from '../data/productItems';
+import type { NextPage, GetServerSideProps } from 'next';
+import type { ProductItemType } from '../data/productItems';
 
-import type { NextPage } from 'next';
-
-const Home: NextPage = () => {
+const Home: NextPage<{ initialProductItems: ProductItemType[] }> = ({ initialProductItems }) => {
   return (
     <>
       <AdSection
@@ -17,10 +16,28 @@ const Home: NextPage = () => {
         adImgAlt='광고 이미지'
       />
       <GridLayout columnWidth='300px' rowWidth='330px'>
-        <ProductListSection productItems={productItems} location='home' />
+        <ProductListSection productItems={initialProductItems} location='home' />
       </GridLayout>
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const res = await fetch('http://localhost:3001/api/fetchProductItems', {
+    method: 'POST',
+    body: JSON.stringify({ fetchStartIndex: 0, fetchLength: 5 }),
+    headers: {
+      'Content-type': 'application/json'
+    }
+  });
+
+  const { fetchedProductItems } = await res.json();
+
+  return {
+    props: {
+      initialProductItems: fetchedProductItems
+    }
+  };
 };
 
 export default Home;
