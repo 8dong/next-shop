@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import GridLayout from '../../templates/GridLayout';
 import ProductItem from '../molecules/ProductItem';
 import ProductItemSkeletonBox from '../molecules/ProductItemSkeletonBox';
-import CartButton from '../atoms/button/CartButton';
+import FloatButton from '../atoms/button/FloatButton';
 
 import cartListSlice from '../../../redux/slice/cartListSlice';
 
@@ -50,12 +50,14 @@ const ProductListSection = ({
       {productItems.map((productItem) => (
         <ProductItemWrapper key={productItem.id}>
           <ProductItem productItem={productItem} />
-          <CartButton
-            topPosition='90%'
+          <FloatButton
+            topPosition='85%'
             leftPosition='85%'
             onClick={handleClickCartButton(productItem)}
             btnColor={isInCartList(productItem) ? '#1890ff' : '#000'}
-          />
+          >
+            <i className='fi fi-rr-shopping-cart'></i>
+          </FloatButton>
         </ProductItemWrapper>
       ))}
       {!isFetchedDone && (

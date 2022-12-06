@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
 import LogoText from '../atoms/text/LogoText';
-import CartButton from '../atoms/button/CartButton';
+import FloatButton from '../atoms/button/FloatButton';
 import CountBadgeElement from '../atoms/image/CountBadgeElement';
 
 import type { RootState } from '../../../redux/store/store';
@@ -20,8 +20,10 @@ const HeaderSection = ({ logoText }: { logoText: string }) => {
     <HeaderSectionWrapper>
       <LogoText logoText={logoText} />
       <div className='cartButton'>
-        <CartButton topPosition='' leftPosition='' onClick={handleClickHeaderCartButton} />
-        <CountBadgeElement count={cartList.length} topPosition='-40%' leftPosition='-40%' />
+        <FloatButton topPosition='' leftPosition='' onClick={handleClickHeaderCartButton}>
+          <i className='fi fi-rr-shopping-cart'></i>
+        </FloatButton>
+        <CountBadgeElement count={cartList.length} topPosition='-10%' leftPosition='-10%' />
       </div>
     </HeaderSectionWrapper>
   );
@@ -37,8 +39,8 @@ const HeaderSectionWrapper = styled.header`
   background-color: #fff;
 
   .cartButton {
-    width: 24px;
-    height: 24px;
+    width: 40px;
+    height: 40px;
 
     position: absolute;
     left: 90%;
