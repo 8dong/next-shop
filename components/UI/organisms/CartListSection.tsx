@@ -1,4 +1,5 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 
 import GridLayout from '../../templates/GridLayout';
@@ -7,14 +8,53 @@ import Button from '../atoms/button/Button';
 import FloatButton from '../atoms/button/FloatButton';
 
 import cartListSlice from '../../../redux/slice/cartListSlice';
+import selectListSlice from '../../../redux/slice/selectedListSlice';
 
 import type { RootState } from '../../../redux/store/store';
 import type { ProductItemType } from '../../../data/productItems';
 
 const CartListSection = () => {
   const cartList = useSelector((store: RootState) => store.cartList);
-  const isInCartList = (productItem: ProductItemType) => {
-    return cartList.some((cartItem) => cartItem.id === productItem.id);
+  const selectedList = useSelector((store: RootState) => store.selectedList);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(selectListSlice.actions.selectItem({ productItems: [...cartList] }));
+  }, []);
+
+  const isInSelectedList = (productItem: ProductItemType) => {
+    return selectedList.some((selectedItem) => selectedItem.id === productItem.id);
+  };
+
+  const handleClickSelectButton = (productItem: ProductItemType) => {
+    return () => {
+      if (isInSelectedList(productItem)) {
+        dispatch(selectListSlice.actions.deSelectItem({ productItems: [productItem] }));
+      } else {
+        dispatch(selectListSlice.actions.selectItem({ productItems: [productItem] }));
+      }
+    };
+  };
+
+  const handleClickRemoveButton = () => {
+    dispatch(cartListSlice.actions.removeCartList({ productItems: [...selectedList] }));
+    dispatch(selectListSlice.actions.deSelectItem({ productItems: [...selectedList] }));
+  };
+
+  const handleClickAllSelectButton = () => {
+    const unSelectedList = cartList.filter((cartItem) => {
+      return !isInSelectedList(cartItem);
+    });
+
+    dispatch(selectListSlice.actions.selectItem({ productItems: [...unSelectedList] }));
+  };
+
+  const handleClickCorssButton = (productItem: ProductItemType) => {
+    return () => {
+      dispatch(cartListSlice.actions.removeCartList({ productItems: [productItem] }));
+      dispatch(selectListSlice.actions.deSelectItem({ productItems: [productItem] }));
+    };
   };
 
   return (
@@ -22,18 +62,29 @@ const CartListSection = () => {
       <div className='cartHeader'>
         <h2>장바구니</h2>
         <div className='buttonGroup'>
-          <Button>삭제</Button>
-          <Button>전체 선택</Button>
+          <Button onClick={handleClickRemoveButton}>삭제</Button>
+          <Button onClick={handleClickAllSelectButton}>전체 선택</Button>
         </div>
       </div>
       <GridLayout columnWidth='300px' rowWidth='330px'>
         {cartList.map((cartItem) => (
           <li key={cartItem.id} className='cartItem'>
             <ProductItem productItem={cartItem} />
-            <FloatButton topPosition='5%' leftPosition='83%' bgColor='#fff'>
+            <FloatButton
+              onClick={handleClickCorssButton(cartItem)}
+              topPosition='5%'
+              leftPosition='83%'
+              bgColor='#fff'
+            >
               <i className='fi fi-rr-cross'></i>
             </FloatButton>
-            <FloatButton topPosition='45%' leftPosition='83%'>
+            <FloatButton
+              onClick={handleClickSelectButton(cartItem)}
+              topPosition='45%'
+              leftPosition='83%'
+              bgColor={isInSelectedList(cartItem) ? '#0066ff' : '#fff'}
+              btnColor={isInSelectedList(cartItem) ? '#fff' : '#000'}
+            >
               <i className='fi fi-rr-check'></i>
             </FloatButton>
           </li>

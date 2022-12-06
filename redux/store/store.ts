@@ -12,14 +12,17 @@ import {
 import storage from 'redux-persist/lib/storage';
 
 import cartListSlice from '../slice/cartListSlice';
+import selectListSlice from '../slice/selectedListSlice';
 
 const rootReducers = combineReducers({
-  cartList: cartListSlice.reducer
+  cartList: cartListSlice.reducer,
+  selectedList: selectListSlice.reducer
 });
 
 const persistConfig = {
   key: 'root',
-  storage
+  storage,
+  whitelist: ['cartList']
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducers);
