@@ -16,8 +16,8 @@ const GridLayout = ({ columnWidth, rowWidth, children }: GridLayoutProps) => {
 
 const GridLayoutWrapper = styled.ul<{ columnWidth: string; rowWidth: string }>`
   display: grid;
-  grid-template-columns: repeat(auto-fit, ${(props) => props.columnWidth});
-  grid-template-rows: repeat(auto-fit, ${(props) => props.rowWidth});
+  grid-template-columns: repeat(auto-fill, ${(props) => props.columnWidth});
+  grid-template-rows: repeat(auto-fill, ${(props) => props.rowWidth});
   justify-content: space-between;
   column-gap: 30px;
   row-gap: 50px;
