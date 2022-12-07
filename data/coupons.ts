@@ -22,6 +22,11 @@ const coupons: CouponType[] = [
     type: 'amount',
     title: '10,000원 할인 쿠폰',
     discountAmount: 10000
+  },
+  {
+    type: 'amount',
+    title: '쿠폰 미적용',
+    discountAmount: 0
   }
 ];
 
