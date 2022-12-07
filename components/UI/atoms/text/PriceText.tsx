@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 
-type PriceType = FixedPriceType | InstallmentPriceType | InstallmentMonth;
+type PriceType =
+  | FixedPriceType
+  | InstallmentPriceType
+  | InstallmentMonth
+  | TotalPriceType
+  | DiscountAmountType
+  | PaymentPriceType;
 
 interface FixedPriceType {
   type: 'fixedPrice';
@@ -16,6 +22,22 @@ interface InstallmentPriceType {
 interface InstallmentMonth {
   type: 'installmentMonth';
   installmentMonth: number;
+}
+
+interface TotalPriceType {
+  type: 'totalPrice';
+  totalPrice: number;
+}
+
+interface DiscountAmountType {
+  type: 'discountAmount';
+  discountAmount: number;
+}
+
+interface PaymentPriceType {
+  type: 'paymentPrice';
+  totalPrice: number;
+  discountAmount: number;
 }
 
 const PriceText = ({ priceConfig }: { priceConfig: PriceType }) => {
@@ -41,10 +63,26 @@ const PriceText = ({ priceConfig }: { priceConfig: PriceType }) => {
     textConfig.ftWeight = '700';
   } else if (priceConfig.type === 'installmentMonth') {
     textContent = `(${priceConfig.installmentMonth} 개월)`;
-    textConfig.ftSize = '13px';
 
+    textConfig.ftSize = '13px';
     textConfig.ftStyle = 'italic';
     textConfig.ftColor = '#818181';
+  } else if (priceConfig.type === 'totalPrice') {
+    textContent = priceConfig.totalPrice.toLocaleString('ko-KR') + '원';
+
+    textConfig.ftColor = '#565656';
+  } else if (priceConfig.type === 'discountAmount') {
+    textContent = priceConfig.discountAmount.toLocaleString('ko-KR') + '원';
+
+    textConfig.ftColor = '#565656';
+  } else if (priceConfig.type === 'paymentPrice') {
+    textContent = `${(priceConfig.totalPrice - priceConfig.discountAmount).toLocaleString(
+      'ko-KR'
+    )} 원`;
+
+    textConfig.ftSize = '20px';
+    textConfig.ftWeight = '700';
+    textConfig.ftColor = '#565656';
   }
 
   return (
