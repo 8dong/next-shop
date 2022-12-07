@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 
 import ImageElement from '../atoms/image/ImageElement';
-import FixedPriceText from '../atoms/text/FixedPriceText';
-import InstallmentMonthText from '../atoms/text/InstallmentMonthText';
-import InstallmentPriceText from '../atoms/text/InstallmentPriceText';
+import PriceText from '../atoms/text/PriceText';
 
 import type { ProductItemType } from '../../../data/productItems';
 
@@ -17,13 +15,24 @@ const ProductItem = ({ productItem }: { productItem: ProductItemType }) => {
         <strong className='productTitle'>{productItem.title}</strong>
         <div className='productItemPrice'>
           <span className='fixedPrice'>
-            <FixedPriceText fixedPrice={productItem.price} />
+            <PriceText priceConfig={{ type: 'fixedPrice', fixedPrice: productItem.price }} />
           </span>
           <div>
             <span className='installmentPrice'>
-              <InstallmentPriceText fixedPrice={productItem.price} installmentMonth={5} />
+              <PriceText
+                priceConfig={{
+                  type: 'installmentPrice',
+                  fixedPrice: productItem.price,
+                  installmentMonth: 5
+                }}
+              />
             </span>
-            <InstallmentMonthText installmentMonth={5} />
+            <PriceText
+              priceConfig={{
+                type: 'installmentMonth',
+                installmentMonth: 5
+              }}
+            />
           </div>
         </div>
       </div>
