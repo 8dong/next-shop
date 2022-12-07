@@ -9,13 +9,17 @@ const SelectedListSection = () => {
   return (
     <SelectedListWrapper>
       <h3>구매 목록</h3>
-      <ul>
-        {selectedList.map((selectedItem) => (
-          <li className='selectedItem' key={selectedItem.id}>
-            {selectedItem.title}
-          </li>
-        ))}
-      </ul>
+      {selectedList.length !== 0 ? (
+        <ul>
+          {selectedList.map((selectedItem) => (
+            <li className='selectedItem' key={selectedItem.id}>
+              {selectedItem.title}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div className='empty'>선택된 상품이 없습니다</div>
+      )}
     </SelectedListWrapper>
   );
 };
@@ -32,6 +36,10 @@ const SelectedListWrapper = styled.section`
 
     text-align: right;
     color: #606060;
+  }
+
+  .empty {
+    padding: 10px;
   }
 
   @media screen and (max-width: 1024px) {

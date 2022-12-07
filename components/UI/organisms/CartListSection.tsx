@@ -66,30 +66,34 @@ const CartListSection = () => {
           <Button onClick={handleClickAllSelectButton}>전체 선택</Button>
         </div>
       </div>
-      <GridLayout columnWidth='300px' rowWidth='330px'>
-        {cartList.map((cartItem) => (
-          <li key={cartItem.id} className='cartItem'>
-            <ProductItem productItem={cartItem} />
-            <FloatButton
-              onClick={handleClickCorssButton(cartItem)}
-              topPosition='5%'
-              leftPosition='83%'
-              bgColor='#fff'
-            >
-              <i className='fi fi-rr-cross'></i>
-            </FloatButton>
-            <FloatButton
-              onClick={handleClickSelectButton(cartItem)}
-              topPosition='45%'
-              leftPosition='83%'
-              bgColor={isInSelectedList(cartItem) ? '#0066ff' : '#fff'}
-              btnColor={isInSelectedList(cartItem) ? '#fff' : '#000'}
-            >
-              <i className='fi fi-rr-check'></i>
-            </FloatButton>
-          </li>
-        ))}
-      </GridLayout>
+      {cartList.length !== 0 ? (
+        <GridLayout columnWidth='300px' rowWidth='330px'>
+          {cartList.map((cartItem) => (
+            <li key={cartItem.id} className='cartItem'>
+              <ProductItem productItem={cartItem} />
+              <FloatButton
+                onClick={handleClickCorssButton(cartItem)}
+                topPosition='5%'
+                leftPosition='83%'
+                bgColor='#fff'
+              >
+                <i className='fi fi-rr-cross'></i>
+              </FloatButton>
+              <FloatButton
+                onClick={handleClickSelectButton(cartItem)}
+                topPosition='45%'
+                leftPosition='83%'
+                bgColor={isInSelectedList(cartItem) ? '#0066ff' : '#fff'}
+                btnColor={isInSelectedList(cartItem) ? '#fff' : '#000'}
+              >
+                <i className='fi fi-rr-check'></i>
+              </FloatButton>
+            </li>
+          ))}
+        </GridLayout>
+      ) : (
+        <div className='empty'>장바구니가 비었습니다</div>
+      )}
     </CartListSectionWrapper>
   );
 };
@@ -113,6 +117,16 @@ const CartListSectionWrapper = styled.section`
 
   .cartItem {
     position: relative;
+  }
+
+  .empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 370px;
+
+    padding: 20px 0;
   }
 
   @media screen and (max-width: 1024px) {
