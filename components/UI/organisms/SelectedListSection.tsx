@@ -40,6 +40,8 @@ const SelectedListWrapper = styled.section`
 
   .empty {
     padding: 10px;
+
+    text-align: right;
   }
 
   @media screen and (max-width: 1024px) {
