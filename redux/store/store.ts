@@ -13,10 +13,12 @@ import storage from 'redux-persist/lib/storage';
 
 import cartListSlice from '../slice/cartListSlice';
 import selectListSlice from '../slice/selectedListSlice';
+import selectedCouponSlice from '../slice/selectedCouponSlice';
 
 const rootReducers = combineReducers({
   cartList: cartListSlice.reducer,
-  selectedList: selectListSlice.reducer
+  selectedList: selectListSlice.reducer,
+  selectedCoupon: selectedCouponSlice.reducer
 });
 
 const persistConfig = {
