@@ -19,10 +19,6 @@ const CartListSection = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(selectListSlice.actions.selectItem({ productItems: [...cartList] }));
-  }, []);
-
   const isInSelectedList = (productItem: ProductItemType) => {
     return selectedList.some((selectedItem) => selectedItem.id === productItem.id);
   };
@@ -56,6 +52,10 @@ const CartListSection = () => {
       dispatch(selectListSlice.actions.deSelectItem({ productItems: [productItem] }));
     };
   };
+
+  useEffect(() => {
+    handleClickAllSelectButton();
+  }, []);
 
   return (
     <CartListSectionWrapper>
