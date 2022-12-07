@@ -41,7 +41,7 @@ const ProductListSection = ({
   } = useInfinityScroll({
     initialList: initialProductItems,
     fetchType: 'productList',
-    fetchUrl: 'http://localhost:3000/api/fetchProductItems',
+    fetchUrl: 'http://localhost:3001/api/fetchProductItems',
     fetchLength: 5
   });
 

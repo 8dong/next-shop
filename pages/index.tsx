@@ -19,7 +19,7 @@ const Home: NextPage<{ initialProductItems: ProductItemType[] }> = ({ initialPro
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await fetch('http://localhost:3000/api/fetchProductItems', {
+  const res = await fetch('http://localhost:3001/api/fetchProductItems', {
     method: 'POST',
     body: JSON.stringify({ fetchStartIndex: 0, fetchLength: 5 }),
     headers: {
