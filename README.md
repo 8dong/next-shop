@@ -8,6 +8,10 @@
 
 3. <a href="http://localhost:3001/" target="_blank">http://localhost:3001/</a> 접속
 
+## 프로젝트 구현 영상
+
+<a href="https://youtu.be/T7rRsfKfBmo">https://youtu.be/T7rRsfKfBmo</a>
+
 ## 기술 스택
 
   <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="Typescript">
