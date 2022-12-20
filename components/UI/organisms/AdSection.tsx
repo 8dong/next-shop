@@ -17,7 +17,7 @@ const AdSection = ({ adTitle, adDesc, adImgSrc, adImgAlt }: AdSectionProps) => {
         <AdBox adTitle={adTitle} adDesc={adDesc} />
       </div>
       <div className='adImg'>
-        <ImageElement imgSrc={adImgSrc} imgAlt={adImgAlt} />
+        <ImageElement imgSrc={adImgSrc} imgAlt={adImgAlt} sizes="(max-width: 1024px) 70vw, 50vw" />
       </div>
     </AdSectionWrapper>
   );

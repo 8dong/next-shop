@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import Image from 'next/image';
 
-const ImageElement = ({ imgSrc, imgAlt }: { imgSrc: string; imgAlt: string }) => {
+const ImageElement = ({ imgSrc, imgAlt, sizes }: { imgSrc: string; imgAlt: string; sizes: string; }) => {
   return (
     <ImageElementWrapper>
-      <Image src={imgSrc} alt={imgAlt} fill />
+      <Image src={imgSrc} alt={imgAlt} fill sizes={sizes}/>
     </ImageElementWrapper>
   );
 };

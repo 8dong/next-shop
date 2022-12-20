@@ -9,7 +9,7 @@ const ProductItem = ({ productItem }: { productItem: ProductItemType }) => {
   return (
     <ProductItemWrapper>
       <div className='productItemImg'>
-        <ImageElement imgSrc={productItem.coverImage} imgAlt={productItem.title} />
+        <ImageElement imgSrc={productItem.coverImage} imgAlt={productItem.title} sizes="330px" />
       </div>
       <div className='productItemInfo'>
         <strong className='productTitle'>{productItem.title}</strong>
