@@ -59,19 +59,47 @@
 
 ### API 명세
 
-- request body에 fetchStartIndex, fetchLength를 포함하여 요청합니다.
+#### productItem
 
-  - fetchStartIndex는 가져올 상품 리스트의 인덱스를 전달합니다.
+##### 요청
 
-  - fetchLength는 가져올 상품의 개수를 전달합니다.
+- URL : `http://shopitemapi-env.eba-zmpmdkiy.ap-northeast-2.elasticbeanstalk.com/`
 
-- response body로 요청한 상품 리스트를 응답으로 전달받습니다.
+- Method : `POST`
+
+- Header :
+
+  - Content-Type : `application/json`
+
+- Body :
+
+  - fetchStartIndex : number
+
+  - fetchLength : number
+
+##### 응답 예시
+
+```
+{
+   fetchedProductItems: [
+      {
+         id: string,
+         title: string,
+         coverImage: string,
+         price: number,
+         score: number,
+         availableCoupon?: boolean
+      }
+   ],
+   isDone: boolean
+}
+```
 
 ### 반응형 웹 구현
 
 - 데스크탑과 모바일 환경을 고려하여 반응형 웹 사이트로 제작하였습니다.
 
-<img src="https://user-images.githubusercontent.com/96307662/210173082-b9891040-4bbb-4022-b02f-a8257cf8ce37.gif" alt="Responsive Web" width="80%" />
+<img src="https://user-images.githubusercontent.com/96307662/210173082-b9891040-4bbb-4022-b02f-a8257cf8ce37.gif" alt="Responsive Web"  />
 
 ### 컴포넌트
 
@@ -103,7 +131,7 @@
 
 - Intersection Observer API를 사용하여 Infinity Scroll을 구현하였습니다. 마지막 Skeleton UI에 도달하는 경우 5개씩 추가적으로 상품을 로드하도록 구현하였습니다.
 
-<img src="https://user-images.githubusercontent.com/96307662/210173373-806861a2-981e-4aae-aa5a-091628eb6ac0.gif" alt="Infinity Scroll" width="80%" />
+<img src="https://user-images.githubusercontent.com/96307662/210173373-806861a2-981e-4aae-aa5a-091628eb6ac0.gif" alt="Infinity Scroll"  />
 
 <hr />
 
@@ -111,7 +139,7 @@
 
 - Header 영역의 카트 버튼에는 현재 장바구니에 포함된 상품의 개수가 표시됩니다.
 
-<img src="https://user-images.githubusercontent.com/96307662/210173418-2c3dfa9d-3bce-4361-9f2d-1bea6470ecd2.gif" alt="Add/Delete Cart" width="80%" />
+<img src="https://user-images.githubusercontent.com/96307662/210173418-2c3dfa9d-3bce-4361-9f2d-1bea6470ecd2.gif" alt="Add/Delete Cart"  />
 
 ### 장바구니 페이지(/cart)
 
@@ -125,13 +153,13 @@
 
 - 상단 전체 선택 버튼 클릭시 장바구니(cartList) 내 모든 상품들이 선택된 상품(selectedList)으로 추가됩니다.
 
-<img src="https://user-images.githubusercontent.com/96307662/210173599-5e2738bb-f8d1-4ac8-a88f-4f48f9c69160.gif" alt="cart page" width="80%" />
+<img src="https://user-images.githubusercontent.com/96307662/210173599-5e2738bb-f8d1-4ac8-a88f-4f48f9c69160.gif" alt="cart page"  />
 
 <hr />
 
 - 각 상품 우측 상단 엑스 버튼을 클릭시 장바구니(cartList)에서 해당 상품을 삭제합니다.
 
-<img src="https://user-images.githubusercontent.com/96307662/210173705-ca78677e-f263-4c61-8c86-e47e8d88ba16.gif" alt="delete to cartList" width="80%" />
+<img src="https://user-images.githubusercontent.com/96307662/210173705-ca78677e-f263-4c61-8c86-e47e8d88ba16.gif" alt="delete to cartList"  />
 
 <hr />
 
@@ -143,8 +171,26 @@
 
   - amount 타입의 쿠폰은 전체 결제 금엑에서 해당 amount만큼만 최종 결제 금액에 반영됩니다.
 
+  ```
+  // amount
+  {
+   type: 'amount',
+   title: string,
+   discountAmount: number
+  }
+  ```
+
   - rate 타입의 쿠폰은 availableCoupon값이 false가 아닌 각 상품들마다 할인된 가격이 누적되어 최종 결제 금액에 반영됩니다.
+
+  ```
+  // rate
+  {
+   type: 'rate',
+   title: string,
+   discountRate: number
+  }
+  ```
 
 - 최적 적용 클릭시 가장 많이 할인되는 쿠폰이 자동적으로 선택되어 적용됩니다.
 
-<img src="https://user-images.githubusercontent.com/96307662/210173798-be4255c0-5d50-4d17-9f88-c136c1cac3fc.gif" alt="coupon apply" width="80%" />
+<img src="https://user-images.githubusercontent.com/96307662/210173798-be4255c0-5d50-4d17-9f88-c136c1cac3fc.gif" alt="coupon apply"  />
