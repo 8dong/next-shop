@@ -20,10 +20,10 @@ const HeaderSection = ({ logoText }: { logoText: string }) => {
     <HeaderSectionWrapper>
       <LogoText logoText={logoText} />
       <div className='cartButton'>
-        <FloatButton topPosition='' leftPosition='' onClick={handleClickHeaderCartButton}>
+        <FloatButton topPosition='' leftPosition='-30%' onClick={handleClickHeaderCartButton}>
           <i className='fi fi-rr-shopping-cart'></i>
         </FloatButton>
-        <CountBadgeElement count={cartList.length} topPosition='-10%' leftPosition='-10%' />
+        <CountBadgeElement count={cartList.length} topPosition='-10%' leftPosition='30%' />
       </div>
     </HeaderSectionWrapper>
   );
