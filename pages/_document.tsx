@@ -5,6 +5,12 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <meta
+            name='description'
+            content='원하는 취미를 인터넷 강의로 손쉽게 제공하는 플랫폼입니다!'
+          />
+          <meta name='keywords' content='강의, 인터넷 강의, 취미' />
+          <meta name='author' content='8dong' />
           <link rel='icon' href='data:,' />
           <link
             rel='stylesheet'

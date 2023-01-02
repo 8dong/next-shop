@@ -1,3 +1,5 @@
+import Head from 'next/head';
+
 import AdSection from '../components/UI/organisms/AdSection';
 import ProductListSection from '../components/UI/organisms/ProductListSection';
 
@@ -7,6 +9,9 @@ import type { ProductItemType } from '../data/productItems';
 const Home: NextPage<{ initialProductItems: ProductItemType[] }> = ({ initialProductItems }) => {
   return (
     <>
+      <Head>
+        <title>Next Shop</title>
+      </Head>
       <AdSection
         adTitle='준비물까지 챙겨주는 온라인 서비스'
         adDesc='취미를 시작하는데 필요한 모든 것을 준비해드려요'
